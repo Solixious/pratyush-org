@@ -1,10 +1,12 @@
 package org.pratyush.model.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.pratyush.constant.TableName;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -15,21 +17,20 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = TableName.SYSTEM_CONFIG)
-public class SystemConfigEntity {
+@Table(name = TableName.USER)
+public class UserEntity {
 
     @Id
-    private String configuration;
-
-    @Column
-    private String value;
+    private String username;
+    private String email;
+    private String password;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SystemConfigEntity that = (SystemConfigEntity) o;
-        return configuration != null && Objects.equals(configuration, that.configuration);
+        UserEntity that = (UserEntity) o;
+        return username != null && Objects.equals(username, that.username);
     }
 
     @Override
