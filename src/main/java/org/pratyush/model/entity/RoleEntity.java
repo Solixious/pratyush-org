@@ -9,41 +9,33 @@ import org.pratyush.constant.ColumnName;
 import org.pratyush.constant.TableName;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = TableName.USER)
-public class UserEntity {
+@Table(name = TableName.ROLE)
+public class RoleEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ColumnName.ID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = ColumnName.USER_NAME, unique = true, nullable = false)
-    private String userName;
+    @Column(name = ColumnName.ROLE_NAME, unique = true, nullable = false)
+    private String name;
 
-    @Column(name = ColumnName.EMAIL, unique = true, nullable = false)
-    private String email;
-
-    @Column(name = ColumnName.PASSWORD, nullable = false)
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = TableName.USER_ROLE, joinColumns = @JoinColumn(name = ColumnName.USER_ID),
-            inverseJoinColumns = @JoinColumn(name = ColumnName.ROLE_ID))
-    private Set<RoleEntity> roles;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "roles")
+    private Collection<UserEntity> users;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        UserEntity that = (UserEntity) o;
+        RoleEntity that = (RoleEntity) o;
         return id != null && Objects.equals(id, that.id);
     }
 

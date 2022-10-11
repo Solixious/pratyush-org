@@ -2,6 +2,7 @@ package org.pratyush.model.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.pratyush.constant.ColumnName;
 import org.pratyush.constant.TableName;
 
 import javax.persistence.Column;
@@ -19,9 +20,10 @@ import java.util.Objects;
 public class SystemConfigEntity {
 
     @Id
+    @Column(name = ColumnName.CONFIGURATION)
     private String configuration;
 
-    @Column
+    @Column(name = ColumnName.VALUE)
     private String value;
 
     @Override
