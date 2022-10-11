@@ -1,4 +1,4 @@
-package org.pratyush;
+package org.pratyush.init;
 
 import org.pratyush.constant.Role;
 import org.pratyush.service.RoleService;
